@@ -1,0 +1,53 @@
+body {
+	background: url(../images/loginbackground.jpg);
+	background-repeak: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-color: #CCCCCC;
+}
+
+#login {
+	height: 200px;
+	width: 300px;
+	background-color: lavender;
+	padding: 50px;
+	position: fixed;
+	top: 100px;
+	right: 100px;
+}
+
+#title {
+	display: block;
+	font-size: 27px;
+	text-align: center;
+	font-family: elephant;
+}
+
+.user {
+	font-size: 15px;
+}
+
+.user input {
+	height: 27px;
+	width: 200px;
+	font-size: 15px;
+}
+
+form div {
+	margin-bottom: 25px;
+}
+
+.button {
+	text-align: center;
+}
+
+.button a {
+	margin-left: 30px;
+	text-decoration: none;
+	color: black;
+}
+
+#unerro,#pderro {
+	display: none;
+	color: red;
+}

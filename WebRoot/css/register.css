@@ -1,0 +1,48 @@
+body {
+	background: url(../images/loginbackground.jpg);
+	background-repeak: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-color: #CCCCCC;
+}
+
+#register {
+	height: 200px;
+	width: 300px;
+	background-color: lavender;
+	padding: 50px;
+	position: fixed;
+	top: 100px;
+	right: 100px;
+}
+form div{
+	margin-bottom: 5px;
+}
+#title {
+	display: block;
+	font-size: 30px;
+	text-align: center;
+	font-family: elephant;
+}
+
+.user span{
+	display: inline-block;
+	text-align: right;
+	width:80px;
+}
+
+.button {
+	text-align: center;
+	font-size: 15px;
+}
+
+.button a {
+	margin-left: 30px;
+	text-decoration: none;
+	color: black;
+}
+
+.user input{
+	display:inline-block;
+	width: 180px;
+}

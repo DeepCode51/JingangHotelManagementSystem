@@ -1,0 +1,36 @@
+#section_top{
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+#section_content{
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+.listdiv{
+	text-align: center;
+}
+
+
+textarea{
+	display:block;
+	resize: none;
+	margin:auto auto;
+}
+
+input[type=submit],select{
+	margin-top: 3px;
+}
+
+input[type=submit]{
+	margin-left: 180px;
+}
+
+a{
+	cursor: pointer;
+}
+
+.fe_bottom{
+	display: none;
+}

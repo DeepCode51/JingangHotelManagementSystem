@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wyz.jingangHotel02.ssm.autoMapper.UserMemberRankScoreMapper">
+
+	<resultMap type="wyz.jingangHotel02.ssm.autoPo.UserMemberRankScore"
+		id="UserMemberRankScoreResultMap">
+		<result column="userID" jdbcType="VARCHAR" property="userid"/>
+		<result column="phone" jdbcType="VARCHAR" property="phone"/>
+		<result column="userName" jdbcType="VARCHAR" property="username" />
+		<result column="rank" jdbcType="VARCHAR" property="rank" />
+		<result column="rankID" jdbcType="INTEGER" property="rankid"/>
+		<result column="discount" jdbcType="DOUBLE" property="discount"/>
+		<result column="scoreID" jdbcType="VARCHAR" property="scoreid" />
+		<result column="operateTime" jdbcType="TIMESTAMP" property="operateTime" />
+		<result column="status" jdbcType="VARCHAR" property="status" />
+		<result column="detailID" jdbcType="VARCHAR" property="detailid" />
+		<result column="restScore" jdbcType="INTEGER" property="restscore" />
+		<result column="goodsID" jdbcType="INTEGER" property="goodsid" />
+		<result column="goodsName" jdbcType="VARCHAR" property="goodsname" />
+		<result column="number" jdbcType="INTEGER" property="number" />
+		<result column="score" jdbcType="INTEGER" property="score" />
+		<result column="memberID" jdbcType="VARCHAR" property="memberid"/>
+	</resultMap>
+
+	<sql id="where_clause">
+		<if test="phone!=null and phone!=''">
+			and user.phone = #{phone}
+		</if>
+		<if test="username!=null and username!=''">
+			and user.username like #{username}
+		</if>
+		<if test="rankid">
+			and rank.rankid = #{rankid}
+		</if>
+	</sql>
+
+	<!-- 会员信息查询 -->
+	<!-- parameterType传入包装对象（包装查询条件）,resultType建议使用扩展对象 -->
+	<select id="findMemberInfo" parameterType="java.lang.String"
+		resultMap="UserMemberRankScoreResultMap">
+		SELECT
+		user.userName,rank.rank,rank.discount,score.operateTime,score.status,score.restScore,goods.goodsID,goods.goodsName,scoredetail.number,scoredetail.score
+		FROM user,member,rank,score,scoredetail,goods
+		WHERE user.memberID =
+		#{memberID,jdbcType=VARCHAR} and user.memberID = member.memberID and
+		member.rank =rank.rankID and
+		member.scoreID = score.scoreID and
+		score.detailID=scoredetail.detailID
+		and scoredetail.goods=goods.goodsID
+		order by score.operateTime DESC
+	</select>
+
+	<!-- 查询最后一条用户ID以便于注册时生成注册ID -->
+	<select id="findLastUserId" resultType="java.lang.String">
+		SELECT userID from user
+		order by userID desc LIMIT 1
+	</select>
+
+	<!-- 为积分兑换商品的插入提供条件scoreid，detailid，restscore -->
+	<select id="prepareforbuy" parameterType="java.lang.String" resultMap="UserMemberRankScoreResultMap">
+		SELECT score.scoreID,score.detailID,score.restScore
+		FROM member,score,scoredetail
+		WHERE member.memberID = #{memberID,jdbcType=VARCHAR} and member.scoreID = score.scoreID and score.detailID=scoredetail.detailID
+		order by score.operateTime DESC LIMIT 1
+	</select>
+	
+	<select id="selectDetailId" resultType="java.lang.String" >
+		SELECT detailID
+		FROM score
+		order by operateTime DESC LIMIT 1
+	</select>
+	
+	<select id="findCountMemberInfo" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		SELECT
+		count(*)
+		FROM user,member,rank,score,scoredetail,goods
+		WHERE user.memberID =
+		#{memberID,jdbcType=VARCHAR} and user.memberID = member.memberID and
+		member.rank =rank.rankID and
+		member.scoreID = score.scoreID and
+		score.detailID=scoredetail.detailID
+		and scoredetail.goods=goods.goodsID
+	</select>
+	
+	<select id="findMemberInfoByPage" parameterType="wyz.jingangHotel02.ssm.autoPo.Example" resultMap="UserMemberRankScoreResultMap">
+		SELECT
+		user.userName,rank.rank,rank.discount,score.operateTime,score.status,score.restScore,goods.goodsID,goods.goodsName,scoredetail.number,scoredetail.score
+		FROM user,member,rank,score,scoredetail,goods
+		WHERE user.memberID =
+		#{memberid,jdbcType=VARCHAR} and user.memberID = member.memberID and
+		member.rank =rank.rankID and
+		member.scoreID = score.scoreID and
+		score.detailID=scoredetail.detailID
+		and scoredetail.goods=goods.goodsID
+		order by score.operateTime DESC
+		limit #{begin},#{pagesize}
+	</select>
+	
+	<select id="findDiscountBymemberid" parameterType="java.lang.String" resultType="java.lang.Double">
+	SELECT rank.discount from member,rank 
+	where member.memberID=#{memberid} and member.rank=rank.rankID
+	</select>
+	
+	<select id="countMembers" parameterType="wyz.jingangHotel02.ssm.autoMapper.UserMemberRankVo" resultType="java.lang.Integer">
+	select count(*)  
+	from user,member,rank 
+	<where>
+	user.memberID = member.memberID and member.rank = rank.rankID
+	<include refid="where_clause"></include>
+	</where>
+	</select>
+	
+	<select id="selectMembers" parameterType="wyz.jingangHotel02.ssm.autoMapper.UserMemberRankVo" resultMap="UserMemberRankScoreResultMap">
+	select user.userid,user.phone,user.userName,rank.rankid,rank.rank,member.memberid 
+	from user,member,rank 
+	<where>
+	user.memberID = member.memberID and member.rank = rank.rankID
+	<include refid="where_clause"></include>
+	</where>
+	order by user.userID limit #{begin},#{pagesize}
+	</select>
+	
+	 <select id="selectStatistics" parameterType="wyz.jingangHotel02.ssm.autoPo.YearStatistics" resultType="java.lang.Integer" >
+		select count(*) 
+		from orders,room
+		where DATE_FORMAT(orders.ordertime,'%Y')=#{year} 
+		and DATE_FORMAT(orders.ordertime,'%m')=#{month}
+		and orders.status='已完成' 
+		and orders.roomID = room.roomID 
+		<include refid="tp_clause"></include>
+	 </select>
+	 <sql id="tp_clause">
+	 	<if test="roomtypeid!=null and roomtypeid!=''">
+	 		and room.roomTypeID = #{roomtypeid}
+	 	</if>
+	 </sql>
+</mapper>

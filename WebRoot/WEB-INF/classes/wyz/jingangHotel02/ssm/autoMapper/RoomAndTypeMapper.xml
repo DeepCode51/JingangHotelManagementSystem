@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wyz.jingangHotel02.ssm.autoMapper.RoomAndTypeMapper">
+	<resultMap type="wyz.jingangHotel02.ssm.autoPo.RoomAndType" id="RoomAndTypeMap">
+	    <id column="roomID" jdbcType="VARCHAR" property="roomid" />
+	    <result column="roomTypeID" jdbcType="INTEGER" property="roomtypeid" />
+	    <result column="image" jdbcType="VARCHAR" property="image" />
+	    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+	    <result column="roomType" jdbcType="VARCHAR" property="roomtype" />
+	    <result column="numOfBeds" jdbcType="INTEGER" property="numofbeds" />
+	    <result column="price" jdbcType="DOUBLE" property="price" />
+	</resultMap>
+	
+	<sql id="Room_Column_List">
+		room.roomID, room.roomTypeID, room.image,room.description
+	</sql>
+	
+	<sql id="query_roomid_where">
+		<if test="roomtypeid!=null and roomtypeid!=''">
+			and room.roomTypeID = #{roomtypeid }
+		</if>
+		<if test="roomlist!=null and roomlist.size()!=0">
+			<!-- 实现 and room.roomID not in(?,?,...) 拼接 -->
+			<foreach collection="roomlist" item="room_id" open="and room.roomID not in(" close=")"
+				separator=",">
+				#{room_id}
+			</foreach>
+		</if>
+	</sql>
+	
+	<sql id="select_clause">
+		<if test="roomid!=null and roomid!=''">
+			and room.roomid like #{roomid } 
+		</if>
+		<if test="roomtypeid!=null and roomtypeid!=''">
+			and room.roomTypeID = #{roomtypeid }
+		</if>
+	</sql>
+	
+	<select id="selectRoomAndTypeWithoutSome" parameterType="wyz.jingangHotel02.ssm.autoPo.RoomVo" resultMap="RoomAndTypeMap">
+		SELECT 
+		<include refid="Room_Column_List" />
+		,roomtype.roomType,roomtype.numOfBeds,roomtype.price 
+		from room,roomtype 
+		<where> 
+			room.roomTypeID = roomtype.roomTypeID
+			<include refid="query_roomid_where"></include>
+		</where>
+	</select>
+	
+	<select id="selectCount" parameterType="wyz.jingangHotel02.ssm.autoPo.RoomVo" resultType="java.lang.Integer">
+		SELECT 
+		count(*) 
+		from room,roomtype 
+		<where> 
+			room.roomTypeID = roomtype.roomTypeID
+			<include refid="query_roomid_where"></include>
+		</where>
+	</select>
+	
+	<select id="selectRooms" parameterType="wyz.jingangHotel02.ssm.autoPo.RoomVo" resultMap="RoomAndTypeMap">
+		select room.*,roomType.roomType,roomType.numOfBeds,roomType.price 
+		from room,roomType 
+	<where> 
+		room.roomTypeID = roomType.roomTypeID 
+		<include refid="select_clause"></include>
+	</where>
+		order by roomid limit #{begin},#{pagesize}
+	</select>
+	
+	<select id="countRooms" parameterType="wyz.jingangHotel02.ssm.autoPo.RoomVo" resultType="java.lang.Integer">
+		select count(*)
+		from room,roomType 
+	<where> 
+		room.roomTypeID = roomType.roomTypeID 
+		<include refid="select_clause"></include>
+	</where>
+	</select>
+</mapper>

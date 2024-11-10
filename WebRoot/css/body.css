@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+body {
+	background: url("../images/bg1.jpg");
+	background-repeak: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-color: #CCCCCC;
+}

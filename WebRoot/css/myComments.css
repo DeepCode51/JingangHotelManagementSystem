@@ -1,0 +1,36 @@
+#section_top{
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+#section_content{
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+.space{
+	width: 800px;
+	display: inline-block;
+}
+
+#bottom{
+	margin-top: 10px;
+	margin-left: 20px;
+	text-align: center;
+}
+
+.listdiv{
+	margin-bottom: 10px;
+}
+
+.content{
+	border: 1px solid gold;
+	width: 1000px;
+	height: 60px;
+}
+
+.reply{
+	margin-top: 2px;
+	border: 1px solid gold;
+	width: 1000px;
+}

@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+#top-background {
+	margin: 5px;
+	width: 100%;
+	height: 80px;
+	background-color: azure;
+}
+
+#symbol {
+	float: left;
+}
+
+#symbol img {
+	margin-top: 10px;
+	margin-left: 20px;
+	height: 60px;
+	width: 120px;
+}
+
+#other {
+	margin-top: 40px;
+	margin-right: 40px;
+	float: right;
+}
+
+#other a {
+	text-decoration: none;
+}

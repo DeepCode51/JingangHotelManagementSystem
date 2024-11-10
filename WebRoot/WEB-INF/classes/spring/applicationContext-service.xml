@@ -1,0 +1,34 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+            http://www.springframework.org/schema/context 
+            http://www.springframework.org/schema/context/spring-context-3.2.xsd
+            http://www.springframework.org/schema/aop 
+            http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+            http://www.springframework.org/schema/tx 
+            http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+            http://www.springframework.org/schema/mvc 
+            http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+	
+	<!-- 定义user的service -->
+	<bean id="userService" class="wyz.jingangHotel02.ssm.service.impl.UserServiceImpl"/>
+	<bean id="loginService" class="wyz.jingangHotel02.ssm.service.impl.LoginServiceImpl"/>
+	<bean id="registerService" class="wyz.jingangHotel02.ssm.service.impl.RegisterServiceImpl"/>
+	<bean id="goodsService" class="wyz.jingangHotel02.ssm.service.impl.GoodsServiceImpl"/>
+	<bean id="userMemberRankScoreService" class="wyz.jingangHotel02.ssm.service.impl.UserMemberRankScoreServiceImpl" />
+	<bean id="scoreService" class="wyz.jingangHotel02.ssm.service.impl.ScoreServiceImpl" />
+	<bean id="scoredetailService" class="wyz.jingangHotel02.ssm.service.impl.ScoredetailServiceImpl" />
+	<bean id="ordersService" class="wyz.jingangHotel02.ssm.service.impl.OrdersServiceImpl" />
+	<bean id="roomAndTypeService" class="wyz.jingangHotel02.ssm.service.impl.RoomAndTypeServiceImpl"/>
+	<bean id="commentsService" class="wyz.jingangHotel02.ssm.service.impl.CommentsServiceImpl"/>
+	<bean id="ordersCommentsService" class="wyz.jingangHotel02.ssm.service.impl.OrdersCommentsServiceImpl"/>
+	<bean id="hMangerService" class="wyz.jingangHotel02.ssm.service.impl.HManagerServiceImpl"/>
+	<bean id="memberService" class="wyz.jingangHotel02.ssm.service.impl.MemberServiceImpl"/>
+	<bean id="rankService" class="wyz.jingangHotel02.ssm.service.impl.RankServiceImpl"/>
+	<bean id="roomService" class="wyz.jingangHotel02.ssm.service.impl.RoomServiceImpl"/>
+	<bean id="roomtypeService" class="wyz.jingangHotel02.ssm.service.impl.RoomtypeServiceImpl"/>
+	<bean id="statisticsService" class="wyz.jingangHotel02.ssm.service.impl.StatisticsServiceImpl"/>
+</beans>

@@ -1,0 +1,17 @@
+#section_top{
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+#section_content{
+	margin-top:10px;
+	margin-left: 20px;
+}
+
+tr{
+	height: 57px;
+}
+
+a {
+	text-decoration: none;
+}

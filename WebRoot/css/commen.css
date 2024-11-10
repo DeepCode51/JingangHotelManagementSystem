@@ -1,0 +1,16 @@
+#nav {
+	float: left;
+}
+
+#section{
+	background-color: mintcream;
+	position: relative;
+	float: left;
+	height: 500px;
+	width: 85%;
+	left: 12%;
+}
+
+a{
+	text-decoration: none;
+}

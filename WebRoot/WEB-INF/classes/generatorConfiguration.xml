@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+<context id="testTables" targetRuntime="MyBatis3" >
+	<commentGenerator>
+		<property name="supperessAllComments" value="true"/>
+	</commentGenerator>
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" 
+    	connectionURL="jdbc:mysql://localhost:3306/hotel_system" userId="root" password="123456">
+    </jdbcConnection>
+
+    <javaTypeResolver>
+        <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+  
+    <javaModelGenerator targetPackage="wyz.jingangHotel02.ssm.autoPo" targetProject=".\src">
+
+        <property name="enableSubPackages" value="false"/>
+
+        <property name="trimStrings" value="true"/>
+    </javaModelGenerator>
+    
+    <sqlMapGenerator targetPackage="wyz.jingangHotel02.ssm.autoMapper" targetProject=".\src">
+        <property name="enableSubPackages" value="false"/>
+    </sqlMapGenerator>
+
+    <javaClientGenerator type="XMLMAPPER" targetPackage="wyz.jingangHotel02.ssm.autoMapper" targetProject="./src">
+        <property name="enableSubPackages" value="false"/>
+    </javaClientGenerator>
+  
+    <table tableName="user" ></table>
+    <table tableName="scoredetail"></table>
+    <table tableName="score"></table>
+    <table tableName="roomtype"></table>
+    <table tableName="room"></table>
+    <table tableName="rank"></table>
+    <table tableName="orders"></table>
+    <table tableName="member"></table>
+    <table tableName="goods"></table>
+    <table tableName="discount"></table>
+    <table tableName="comments"></table>
+    <table tableName="h_manager"></table>
+</context>
+
+</generatorConfiguration>

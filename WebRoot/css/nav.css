@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+.nav {
+	height: 400px;
+	width: 120px;
+	position:fixed;
+	text-align: center;
+	list-style-type: none;
+	padding: 5px;
+	background-color: aliceblue;
+}
+
+.li {
+	height:16%;
+	
+}
+
+.nav a {
+	display:block;
+	line-height:50px;
+	text-decoration: none;
+}
+li:HOVER {
+	background-color: lightyellow;
+}

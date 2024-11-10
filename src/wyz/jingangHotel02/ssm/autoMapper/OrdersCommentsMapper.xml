@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wyz.jingangHotel02.ssm.autoMapper.OrdersCommentsMapper">
+	<resultMap type="wyz.jingangHotel02.ssm.autoPo.CommentsWithBLOBs" id="ResultMap">
+		<id column="id" jdbcType="INTEGER" property="id" />
+	    <result column="status" jdbcType="VARCHAR" property="status" />
+	    <result column="commentTime" jdbcType="TIMESTAMP" property="commenttime" />
+	    <result column="score" jdbcType="DOUBLE" property="score" />
+	    <result column="commetContent" jdbcType="LONGVARCHAR" property="commetcontent" />
+	    <result column="commentReply" jdbcType="LONGVARCHAR" property="commentreply" />
+	    <result column="img" jdbcType="LONGVARCHAR" property="img" />
+	</resultMap>
+	
+	<resultMap type="wyz.jingangHotel02.ssm.autoPo.UserCommemts" id="ExtResultMap" extends="ResultMap">
+		<result column="phone" jdbcType="VARCHAR" property="phone"/>
+		<result column="userID" jdbcType="VARCHAR" property="userid" />
+	</resultMap>
+	<sql id="query_commemts_where">
+		<if test="userid!=null and userid!=''">
+			and orders.userID = #{userid }
+		</if>
+		<if test="ordersstatus!=null and ordersstatus!=''">
+			and orders.status=#{ordersstatus}
+		</if>
+		<if test="commentsstatus!=null and commentsstatus!=''">
+			and comments.status = #{commentsstatus }
+		</if>
+	</sql>
+	
+	<sql id="query_two_commemts_where">
+		<if test="userid!=null and userid!=''">
+			and user.userID = #{userid }
+		</if>
+		<if test="ordersstatus!=null and ordersstatus!=''">
+			and orders.status=#{ordersstatus}
+		</if>
+		<if test="commentsstatus!=null and commentsstatus!=''">
+			and comments.status = #{commentsstatus }
+		</if>
+	</sql>
+	<select id="selectUserComments" parameterType="wyz.jingangHotel02.ssm.autoPo.OrdersComments" resultMap="ResultMap">
+		select comments.* 
+		from orders,comments 
+		<where>
+			orders.commemtID = comments.id
+			<include refid="query_commemts_where"></include>
+		</where>
+		order by comments.commentTime desc
+	</select>
+	
+	<select id="selectCountUserComments" parameterType="wyz.jingangHotel02.ssm.autoPo.OrdersCommentsVo" resultType="java.lang.Integer">
+		select count(*)
+		from orders,comments 
+		<where>
+			orders.commemtID = comments.id
+			<include refid="query_commemts_where"></include>
+		</where>
+	</select>
+	
+	<select id="selectUserCommentsByPage" parameterType="wyz.jingangHotel02.ssm.autoPo.OrdersCommentsVo" resultMap="ResultMap">
+		select orders.userID,comments.* 
+		from orders,comments 
+		<where>
+			orders.commemtID = comments.id
+			<include refid="query_commemts_where"></include>
+		</where>
+		order by comments.commentTime desc limit #{begin},#{pageSize};
+	</select>
+	
+	<select id="selectAllComments" parameterType="wyz.jingangHotel02.ssm.autoPo.OrdersComments" resultMap="ExtResultMap">
+		select user.phone,comments.* 
+		from user,orders,comments 
+		<where>
+			user.userID = orders.userID and orders.commemtID = comments.id
+			<include refid="query_two_commemts_where"></include>
+		</where>
+		order by comments.commentTime desc;
+	</select>
+	
+	<!-- 分页 -->
+	<select id="selectAllCommentsByPage" parameterType="wyz.jingangHotel02.ssm.autoPo.OrdersCommentsVo" resultMap="ExtResultMap">
+		select orders.userID,user.phone,comments.* 
+		from user,orders,comments 
+		<where>
+			user.userID = orders.userID and orders.commemtID = comments.id
+			<include refid="query_two_commemts_where"></include>
+		</where>
+		order by comments.commentTime desc limit #{begin},#{pageSize};
+	</select>
+	
+	<!-- 计算count实现分页 -->
+	<select id="selectCountAllComments" parameterType="wyz.jingangHotel02.ssm.autoPo.OrdersCommentsVo" resultType="java.lang.Integer">
+		select count(*)
+		from user,orders,comments 
+		<where>
+			user.userID = orders.userID and orders.commemtID = comments.id
+			<include refid="query_two_commemts_where"></include>
+		</where>
+	</select>
+</mapper>

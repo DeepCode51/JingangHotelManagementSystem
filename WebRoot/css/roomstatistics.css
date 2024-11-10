@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+
+#tb {
+	display: none;
+	position: relative;
+	width: 600px;
+	height: 100px;
+	padding: 100px;
+	margin-top: 100px;
+	margin-left: 100px;
+	border: 1px black solid;
+	border-top: none;
+	border-right: none;
+}
+
+#tb div {
+	border: 1px solid greenyellow;
+	height: 0;
+	width: 30px;
+	background-color: greenyellow;
+	position: absolute;
+	bottom: 0px;
+}
+
+.num {
+	position: absolute;
+	display: block;
+	top: -30px;
+}
+
+.month {
+	position: absolute;
+	display: block;
+	bottom: -30px;
+	font-size: 12px;
+	font-weight: bold;
+}

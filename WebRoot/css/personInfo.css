@@ -1,0 +1,39 @@
+#fix {
+	text-decoration: none;
+}
+
+#lk {
+	text-align: center;
+}
+
+#one{
+	margin-top:80px;
+	margin-left: 100px;
+}
+
+#three{
+	margin-top:80px;
+	margin-left: 100px;
+}
+
+#five{
+	margin-top:80px;
+	margin-left: 100px;
+}
+
+#two{
+	position: relative;
+	top:-20px;
+	left: 500px;
+}
+
+#four{
+	position: relative;
+	top:-20px;
+	left: 500px;
+}
+
+#six{
+	margin-left:300px;
+	margin-top: 40px; 
+}

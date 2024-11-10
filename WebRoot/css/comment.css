@@ -1,0 +1,44 @@
+#section_content{
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+#section_top{
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+/*img{
+	height:100px;
+	width: 150px;
+	margin-right:20px;
+}*/
+
+#avgScore{
+	margin-bottom: 20px;
+}
+
+#bottom{
+	text-align: center;
+}
+
+.space{
+	width: 300px;
+	display: inline-block;
+}
+
+.content{
+	border: 1px solid gold;
+	width: 1000px;
+	height: 60px;
+}
+
+.listdiv{
+	margin-bottom: 10px;
+}
+
+.reply{
+	margin-top: 2px;
+	border: 1px solid gold;
+	width: 1000px;
+}
